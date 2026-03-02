@@ -1,0 +1,28 @@
+# dependencies
+node_modules
+
+# build output
+dist
+
+# environment variables
+.env
+.env.*
+!.env.example
+
+# editor / IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+
+# logs
+*.log
+npm-debug.log*
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Vite
+vite.config.ts.timestamp-*

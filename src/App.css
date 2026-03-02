@@ -1,0 +1,124 @@
+/* App.css — library-owned selectors only. All component styles use Tailwind utilities. */
+
+/* tiptap editor */
+.tiptap {
+  outline: none;
+  min-height: 32px;
+  padding: 6px 8px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.tiptap p { margin: 0; }
+
+.tiptap .is-editor-empty::before {
+  content: attr(data-placeholder);
+  color: #a7aeba;
+  pointer-events: none;
+  float: left;
+  height: 0;
+}
+
+/* @mention chip */
+.mention {
+  background: #dbeafe;
+  color: #2563eb;
+  border-radius: 4px;
+  padding: 1px 4px;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+/* tippy popup — strip default styles so our component controls the look */
+.tippy-box {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  z-index: 9999 !important;
+  max-width: none !important;
+}
+.tippy-box .tippy-content { padding: 0 !important; }
+.tippy-box .tippy-arrow    { display: none; }
+
+/* edges — fat invisible interaction zone so the thin line is easy to click */
+.react-flow__edge-interaction {
+  stroke-width: 24 !important;
+}
+
+.react-flow__edge:hover .react-flow__edge-path {
+  stroke: #7c4dff;
+  stroke-width: 3;
+}
+
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke: #7c4dff;
+  stroke-width: 3;
+}
+
+.react-flow__edge:hover .react-flow__edgeupdater {
+  fill: #ffffff;
+  stroke: #8c63f4;
+  stroke-width: 2;
+}
+
+/* handles — hidden by default, show on hover or selection */
+.react-flow__handle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid #8c63f4;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.react-flow__node:hover .react-flow__handle,
+.react-flow__node.selected .react-flow__handle {
+  opacity: 1;
+}
+
+.react-flow__handle-left  { left:  -7px; }
+.react-flow__handle-right { right: -7px; }
+
+/* zoom controls */
+.react-flow__controls {
+  left: 16px !important;
+  bottom: 16px !important;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+}
+
+.react-flow__controls-button {
+  width: 32px !important;
+  height: 32px !important;
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 6px;
+  color: #1f2937 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 !important;
+}
+
+.react-flow__controls-button:hover {
+  background: #f1f5f9 !important;
+}
+
+.react-flow__controls-button svg {
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+@media (max-width: 640px) {
+  .react-flow__controls {
+    left: 8px !important;
+    bottom: max(env(safe-area-inset-bottom, 16px), 16px) !important;
+  }
+}
