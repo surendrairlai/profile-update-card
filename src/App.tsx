@@ -60,7 +60,7 @@ export default function App() {
     []
   );
 
-  // Manual connections need defaultEdgeOptions merged in for the arrowhead.
+
   const onConnect = useCallback(
     (connection: Connection) =>
       setEdges((eds) => addEdge({ ...connection, ...defaultEdgeOptions }, eds)),
@@ -74,15 +74,15 @@ export default function App() {
   );
 
   const handleStartJourney = useCallback(() => {
-    setNodes([
-      { id: `node-${Date.now()}`, type: 'updateContactField', position: { x: 200, y: 120 }, data: {} },
-    ]);
+    const newNode = { id: `node-${Date.now()}`, type: 'updateContactField', position: { x: 200, y: 120 }, data: {} };
+    console.log('handleStartJourney → creating node:', newNode);
+    setNodes([newNode]);
   }, []);
 
   const isEmpty = nodes.length === 0;
 
   return (
-    <div style={{ width: '100vw', height: '100vh' }} className="relative">
+    <div style={{ width: '100vw', height: '100vh', background: '#f8fafc' }} className="relative">
       <ReactFlow
         nodes={nodes}
         edges={edges}

@@ -259,9 +259,9 @@ export function FieldNameDropdown({ fields, selectedField, onChange, onCreateFie
                       <div key={field.id} role="option" aria-selected={isSelected}
                         onClick={() => selectField(field)}
                         onMouseEnter={() => setHighlightIdx(idx)}
-                        className={`px-3 py-2 cursor-pointer text-sm flex items-center
+                        className={`px-3 py-2 cursor-pointer text-sm text-gray-800 flex items-center
                                     justify-between transition-colors
-                                    ${isSelected                      ? 'bg-brand-light text-gray-900' : ''}
+                                    ${isSelected                      ? 'bg-brand-light text-gray-900!' : ''}
                                     ${isHighlighted                   ? 'bg-brand-light' : ''}
                                     ${!isSelected && !isHighlighted   ? 'hover:bg-brand-light' : ''}`}
                       >

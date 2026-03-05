@@ -116,6 +116,15 @@
   stroke: currentColor;
 }
 
+/* custom scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
+
 @media (max-width: 640px) {
   .react-flow__controls {
     left: 8px !important;
