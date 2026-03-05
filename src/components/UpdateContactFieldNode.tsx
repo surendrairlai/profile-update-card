@@ -2,6 +2,7 @@ import { memo, useCallback, useMemo, useState } from 'react';
 import { Handle, Position, useReactFlow, useEdges, type NodeProps } from '@xyflow/react';
 import { FieldNameDropdown } from './FieldNameDropdown';
 import { ValueEditor } from './ValueEditor';
+import { Confetti } from './Confetti';
 import { ALL_FIELDS } from '../data/fields';
 import type { FieldDefinition, CardState } from '../types';
 import UserIcon      from '../assets/icons/ui/User_01.svg';
@@ -51,6 +52,7 @@ const EMPTY_STATE: CardState = {
 export const UpdateContactFieldNode = memo(({ id, selected, positionAbsoluteX, positionAbsoluteY }: NodeProps) => {
   const [state, setState]               = useState<CardState>(EMPTY_STATE);
   const [customFields, setCustomFields] = useState<FieldDefinition[]>([]);
+  const [showConfetti, setShowConfetti] = useState(false);
 
   const { setNodes, setEdges, deleteElements } = useReactFlow();
   const edges = useEdges();
@@ -89,6 +91,14 @@ export const UpdateContactFieldNode = memo(({ id, selected, positionAbsoluteX, p
     (rawValue: string, displayValue: string, isPicked: boolean) => {
       setState((prev) => ({ ...prev, rawValue, displayValue, isPickedValue: isPicked }));
       save('value_changed', { fieldId: state.selectedField?.id, rawValue, displayValue, isPicked });
+
+      if (state.selectedField?.id === 'birthday' && isPicked) {
+        const today = new Date();
+        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const yyyy = today.getFullYear();
+        if (displayValue === `${dd}/${mm}/${yyyy}`) setShowConfetti(true);
+      }
     },
     [save, state.selectedField]
   );
@@ -140,8 +150,8 @@ export const UpdateContactFieldNode = memo(({ id, selected, positionAbsoluteX, p
         </div>
       )}
 
-      {/* No overflow-hidden here — the field dropdown must escape the card boundary. */}
-      <div className="bg-white border-2 border-brand rounded-xl shadow-sm">
+      <div className="bg-white border-2 border-brand rounded-xl shadow-sm relative">
+        {showConfetti && <Confetti onDone={() => setShowConfetti(false)} />}
 
         <Handle type="target" position={Position.Left} />
         <Handle type="source" position={Position.Right} />
